@@ -1,24 +1,42 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A WebApp for student activity code for PeakChallenges
 
-Things you may want to cover:
+kids login
+do activities
+report on activities
+reviewed by teacher and kids
 
-* Ruby version
+## Instructions
 
-* System dependencies
+* **System Dependencies**
 
-* Configuration
+postgresql
 
-* Database creation
+* **Configuration**
 
-* Database initialization
+N/A
 
-* How to run the test suite
+* **Database creation**
+```
+bin/rails db:create
+bin/rails db:migrate
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+* **Database initialization**
+```
+bin/rails db:seed
+```
 
-* Deployment instructions
+* **Run the tests**
+```
+bundle exec rspec
+```
 
-* ...
+* **Services** (job queues, cache servers, search engines, etc.)
+
+N/A
+
+* **Deployment instructions**
+
+N/A
