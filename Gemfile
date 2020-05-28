@@ -44,3 +44,113 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+##############
+# ADDED GEMS #
+##############
+
+# BACK END
+##########
+gem 'devise'
+
+# time of day - with timezones and localizations
+# gem 'tod'
+
+# FRONT END
+###########
+gem 'bulma-rails'
+# gem 'bulma-extensions-rails'
+
+# DEV / TESTS
+#############
+group :development, :test do
+  gem 'awesome_print'        # formats pry (& irb outputs into readable formats)
+
+  gem 'pry-rails'
+  gem 'pry-byebug'           # Adds byebug's step debugging and stack navigation
+  # gem 'pry-debugger'       # adds step, continue, etc (alternative to pry-byebug)
+  gem 'pry-stack_explorer'   # easy stack traces when debugging
+  # more pry gems if needed at: https://spin.atomicobject.com/2012/08/06/live-and-let-pry/
+
+  gem 'factory_bot_rails'
+  gem 'faker'
+
+  # gem 'rspec-rails'
+  gem 'capybara'
+  gem 'rspec-rails', '~> 4.0.0'
+
+  # lets spring work with rspec
+  gem 'spring-commands-rspec'
+end
+
+
+group :test do
+  # easier tests (inside rspec)
+  gem 'shoulda-matchers'
+
+  # cucumber can test emails (rspec too?)
+  # gem 'email_spec'
+
+  # code coverage
+  gem 'simplecov'
+  gem 'simplecov-console'
+end
+
+group :development do
+  # capture emails in the web browser (when testing by hand)
+  # gem 'letter_opener'
+  #
+  # capture emails in the web browser (when testing by hand)
+  # gem 'mailcatcher'
+  #
+  # also consider using: https://mailcatcher.me/
+  # (can view email layout in browser)
+
+  # KEEP GEMS up-to-date using:
+  #############################
+  # bundle outdated
+
+  # MOST OF THE FOLLOWING can be integrated into CI systems
+  ################################
+  # GEM DEPENDENCY SECURITY CHECKS
+  ################################
+  # gem 'bundler-audit', require: false
+  # bundle audit check --update
+
+  # CODE QUALITY
+  ##############
+  # code smells & churn - static code analysis
+  # also includes the gems: reek, flay & flog
+  # gem 'rubycritic', require: false
+  # usage (checks everything in the app folder):
+  # rubycritic app
+
+  # rubocop - ruby linter (formatting checks)
+  # gem 'rubocop', require: false
+  # Syle and Layout - can be noisy and person use:
+  # rubocop --except Style Layout
+  #
+  # to just do security checks use:
+  # rubocop --only Security
+  #
+  # or to exclude folders, etc use:
+  # rubocop -c .rubocop_security.yml
+
+  # security checks
+  #################
+  # https://www.occamslabs.com/blog/securing-your-ruby-and-rails-codebase
+  # http://fretless.com/blog/static-security-analysis-of-your-ruby-and-rails-applications/
+
+  # check code for security coding mistakes
+  # gem 'brakeman', require: false
+  # brakeman
+  # or the opensource version
+  # gem 'railroader', :require => false
+  # railroader
+  # checks gems for security flaws
+
+  # also useful for sinatra, etc. (checks CVE-2013-6421 records)
+  # gem 'dawnscanner', require: false
+  # bundle install
+  # dawn --console .
+end
