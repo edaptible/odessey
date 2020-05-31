@@ -58,7 +58,7 @@ gem 'devise'
 
 # FRONT END
 ###########
-gem 'bulma-rails'
+# gem 'bulma-rails'
 # gem 'bulma-extensions-rails'
 
 # DEV / TESTS

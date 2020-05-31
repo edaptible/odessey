@@ -1,11 +1,18 @@
 {
-  "name": "peakchallenges_app",
+  "name": "student_challenges",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-brands": "^5.0.13",
+    "@fortawesome/fontawesome-free-regular": "^5.0.13",
     "@rails/actioncable": "^6.0.0",
+    "@rails/actiontext": "^6.0.3-1",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
+    "bulma": "^0.8.2",
+    "stimulus": "^1.1.1",
+    "trix": "^1.2.0",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",

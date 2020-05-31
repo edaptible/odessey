@@ -1,0 +1,109 @@
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <p class="title is-3">
+        <span>Student Challenges</span>
+      </p>
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-start">
+      <%# if current_user %>
+        <%# link_to "Home", tenant_path(current_user.tenant), class: 'navbar-item' %>
+      <%# else %>
+        <%= link_to "Home", root_path, class: 'navbar-item' %>
+      <%# end %>
+
+      <%# if current_user && current_user.user_role == "manager" %>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Manage
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item">
+              Tenant
+            </a>
+            <a class="navbar-item">
+              Spaces
+            </a>
+            <a class="navbar-item">
+              Categories
+            </a>
+            <a class="navbar-item">
+              Time Slots
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item">
+              User Roles
+            </a>
+          </div>
+        </div>
+      <%# end %>
+
+      <div class="navbar-item has-dropdown is-hoverable is-left">
+        <a class="navbar-link">
+          Other
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+            About
+          </a>
+          <a class="navbar-item">
+            Contact
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item">
+            Report an issue
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="navbar-end">
+
+      <%# if @demo_present && (@tenant_count > 0) %>
+      <div class="navbar-item">
+        <div class="buttons">
+          <%# link_to "All Schedules", tenants_path, class: 'button is-light'  %>
+        </div>
+      </div>
+      <%# end %>
+
+      <div class="navbar-item">
+        <div class="buttons">
+
+          <% if user_signed_in? %>
+            <%= link_to "#{current_user.email}", edit_user_registration_path, class: 'button is-primary' %>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'button is-light' %>
+          <% else %>
+            <%# if @demo_present %>
+              <%# link_to "Sign up", new_user_registration_path, :class => 'button is-primary'  %>
+            <%# end %>
+            <%= link_to new_user_session_path, class: 'navbar-item is-light' do %>
+              <span class="icon">
+                <i class="far fa-star"></i>
+              </span>
+              <span>Login</span>
+            <% end %>
+            <%= link_to new_user_registration_path, :class => 'button is-primary' do %>
+              <span class="icon">
+                <i class="far fa-star"></i>
+              </span>
+              <span>Signup</span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>

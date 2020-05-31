@@ -1,0 +1,14 @@
+body {
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  height:100vh;
+}
+.navbar {
+  background-color: #f0f5f5;
+  padding:2rem 1.5rem;
+}
+.section {
+  display:flex;
+  flex:1 0 auto;
+}

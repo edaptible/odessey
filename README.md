@@ -1,6 +1,6 @@
 # README
 
-A WebApp for student activity code for PeakChallenges
+A WebApp for student activity code for StudentChallenges
 
 kids login
 do activities
