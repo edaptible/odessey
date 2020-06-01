@@ -1,6 +1,6 @@
 # README
 
-A WebApp for student activity code for StudentChallenges
+A WebApp for student and faculty Odyssey of Challenges
 
 kids login
 do activities

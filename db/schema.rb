@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_31_204240) do
+ActiveRecord::Schema.define(version: 2020_05_31_143349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,13 +52,14 @@ ActiveRecord::Schema.define(version: 2020_05_31_204240) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "agile_concepts_challenges", id: false, force: :cascade do |t|
-    t.bigint "challenge_id", null: false
+  create_table "agile_concepts_student_challenges", id: false, force: :cascade do |t|
+    t.bigint "student_challenge_id", null: false
     t.bigint "agile_concept_id", null: false
-    t.bigint "challenges_id", null: false
+    t.bigint "student_challenges_id", null: false
     t.bigint "agile_concepts_id", null: false
-    t.index ["agile_concepts_id"], name: "index_agile_concepts_challenges_on_agile_concepts_id"
-    t.index ["challenges_id"], name: "index_agile_concepts_challenges_on_challenges_id"
+    t.index ["agile_concepts_id"], name: "index_agile_id_in_stu_agile_join"
+    t.index ["student_challenge_id", "agile_concept_id"], name: "unique_stu_challenges_agile_concepts", unique: true
+    t.index ["student_challenges_id"], name: "index_stu_challenges_id_in_stu_agile_join"
   end
 
   create_table "challenge_levels", force: :cascade do |t|
@@ -68,40 +69,20 @@ ActiveRecord::Schema.define(version: 2020_05_31_204240) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "challenges", force: :cascade do |t|
-    t.string "challenge_name"
-    t.text "time_commitment"
-    t.text "prerequisits"
-    t.text "student_instructions"
-    t.text "faculty_coaching_notes"
-    t.bigint "challenge_level_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["challenge_level_id"], name: "index_challenges_on_challenge_level_id"
-  end
-
-  create_table "challenges_edgile_practices", id: false, force: :cascade do |t|
-    t.bigint "challenge_id", null: false
-    t.bigint "edgile_practice_id", null: false
-    t.bigint "challenges_id", null: false
-    t.bigint "edgile_practices_id", null: false
-    t.index ["challenges_id"], name: "index_challenges_edgile_practices_on_challenges_id"
-    t.index ["edgile_practices_id"], name: "index_challenges_edgile_practices_on_edgile_practices_id"
-  end
-
-  create_table "challenges_edgile_values", id: false, force: :cascade do |t|
-    t.bigint "challenge_id", null: false
-    t.bigint "edgile_value_id", null: false
-    t.bigint "challenges_id", null: false
-    t.bigint "edgile_values_id", null: false
-    t.index ["challenges_id"], name: "index_challenges_edgile_values_on_challenges_id"
-    t.index ["edgile_values_id"], name: "index_challenges_edgile_values_on_edgile_values_id"
-  end
-
   create_table "edgile_practices", force: :cascade do |t|
     t.string "practice_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "edgile_practices_student_challenges", id: false, force: :cascade do |t|
+    t.bigint "student_challenge_id", null: false
+    t.bigint "edgile_practice_id", null: false
+    t.bigint "student_challenges_id", null: false
+    t.bigint "edgile_practices_id", null: false
+    t.index ["edgile_practices_id"], name: "index_edg_practices_id_in_stu_practices_join"
+    t.index ["student_challenge_id", "edgile_practice_id"], name: "unique_stu_challenges_n_edg_practices", unique: true
+    t.index ["student_challenges_id"], name: "index_stu_challenges_id_in_stu_practices_join"
   end
 
   create_table "edgile_values", force: :cascade do |t|
@@ -110,24 +91,59 @@ ActiveRecord::Schema.define(version: 2020_05_31_204240) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "edgile_values_student_challenges", id: false, force: :cascade do |t|
+    t.bigint "student_challenge_id", null: false
+    t.bigint "edgile_value_id", null: false
+    t.bigint "student_challenges_id", null: false
+    t.bigint "edgile_values_id", null: false
+    t.index ["edgile_values_id"], name: "index_edg_values_id_in_stu_values_join"
+    t.index ["student_challenge_id", "edgile_value_id"], name: "unique_stu_challenges_edg_values", unique: true
+    t.index ["student_challenges_id"], name: "index_stu_challenges_id_in_stu_values_join"
+  end
+
+  create_table "student_challenges", force: :cascade do |t|
+    t.string "student_challenge_name"
+    t.bigint "challenge_level_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["challenge_level_id"], name: "index_student_challenges_on_challenge_level_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "user_role"
+    t.string "first_name"
+    t.string "last_name"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "agile_concepts_challenges", "agile_concepts", column: "agile_concepts_id"
-  add_foreign_key "agile_concepts_challenges", "challenges", column: "challenges_id"
-  add_foreign_key "challenges", "challenge_levels"
-  add_foreign_key "challenges_edgile_practices", "challenges", column: "challenges_id"
-  add_foreign_key "challenges_edgile_practices", "edgile_practices", column: "edgile_practices_id"
-  add_foreign_key "challenges_edgile_values", "challenges", column: "challenges_id"
-  add_foreign_key "challenges_edgile_values", "edgile_values", column: "edgile_values_id"
+  add_foreign_key "agile_concepts_student_challenges", "agile_concepts", column: "agile_concepts_id"
+  add_foreign_key "agile_concepts_student_challenges", "student_challenges", column: "student_challenges_id"
+  add_foreign_key "edgile_practices_student_challenges", "edgile_practices", column: "edgile_practices_id"
+  add_foreign_key "edgile_practices_student_challenges", "student_challenges", column: "student_challenges_id"
+  add_foreign_key "edgile_values_student_challenges", "edgile_values", column: "edgile_values_id"
+  add_foreign_key "edgile_values_student_challenges", "student_challenges", column: "student_challenges_id"
+  add_foreign_key "student_challenges", "challenge_levels"
 end
