@@ -7,6 +7,7 @@ class StudentChallenge < ApplicationRecord
   belongs_to :challenge_level
 
   # write-up can handle photos
+  has_rich_text :student_coaching_ideas
   has_rich_text :student_challenge_description
 
 end

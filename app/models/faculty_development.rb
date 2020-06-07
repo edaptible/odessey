@@ -6,6 +6,7 @@ class FacultyDevelopment < ApplicationRecord
 
   belongs_to :faculty_development_group
 
+  has_rich_text :faculty_coaching_ideas
   has_rich_text :faculty_development_description
 
 end

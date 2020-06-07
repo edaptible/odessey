@@ -3,6 +3,6 @@ class AddFieldsToUser < ActiveRecord::Migration[6.0]
     add_column    :users, :user_role,  :string, null: false, default: "student"
     rename_column :users, :email, :username
 
-    add_reference :users, :school, null: false, foreign_key: true #, index: true
+    add_reference :users, :cohort, null: false, foreign_key: true #, index: true
   end
 end

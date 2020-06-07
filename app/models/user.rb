@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   # Include default devise modules.
   # devise  :database_authenticatable, :registerable,
   #       :recoverable, :rememberable, :validatable
@@ -7,8 +8,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :rememberable,
           authentication_keys: [:username]
 
-  validates :username, uniqueness: true
-
   has_many :student_sumissions, dependent: :destroy
+
+  belongs_to :cohort
+
+  validates :username, uniqueness: true
 
 end

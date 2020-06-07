@@ -99,6 +99,13 @@ ActiveRecord::Schema.define(version: 2020_06_06_091455) do
     t.index ["student_challenges_id"], name: "index_stu_challenges_id_in_stu_agile_join"
   end
 
+  create_table "cohorts", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["school_id"], name: "index_cohorts_on_school_id"
+  end
+
   create_table "edgile_practices", force: :cascade do |t|
     t.string "practice_name"
     t.datetime "created_at", precision: 6, null: false
@@ -216,10 +223,10 @@ ActiveRecord::Schema.define(version: 2020_06_06_091455) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "user_role", default: "student", null: false
-    t.bigint "school_id", null: false
+    t.bigint "cohort_id", null: false
+    t.index ["cohort_id"], name: "index_users_on_cohort_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["school_id"], name: "index_users_on_school_id"
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
@@ -229,6 +236,7 @@ ActiveRecord::Schema.define(version: 2020_06_06_091455) do
   add_foreign_key "agile_concepts_faculty_challenges", "faculty_challenges", column: "faculty_challenges_id"
   add_foreign_key "agile_concepts_student_challenges", "agile_concepts", column: "agile_concepts_id"
   add_foreign_key "agile_concepts_student_challenges", "student_challenges", column: "student_challenges_id"
+  add_foreign_key "cohorts", "schools"
   add_foreign_key "edgile_practices_faculty_challenges", "edgile_practices", column: "edgile_practices_id"
   add_foreign_key "edgile_practices_faculty_challenges", "faculty_challenges", column: "faculty_challenges_id"
   add_foreign_key "edgile_practices_student_challenges", "edgile_practices", column: "edgile_practices_id"
@@ -241,5 +249,5 @@ ActiveRecord::Schema.define(version: 2020_06_06_091455) do
   add_foreign_key "schools", "admins"
   add_foreign_key "student_challenges", "student_challenge_levels"
   add_foreign_key "student_submissions", "student_challenges"
-  add_foreign_key "users", "schools"
+  add_foreign_key "users", "cohorts"
 end
