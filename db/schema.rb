@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_06_091455) do
+ActiveRecord::Schema.define(version: 2020_06_01_191455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,9 +74,10 @@ ActiveRecord::Schema.define(version: 2020_06_06_091455) do
   end
 
   create_table "agile_concepts", force: :cascade do |t|
-    t.string "concept_name"
+    t.string "agile_concept_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["agile_concept_name"], name: "index_agile_concepts_on_agile_concept_name", unique: true
   end
 
   create_table "agile_concepts_faculty_challenges", id: false, force: :cascade do |t|
@@ -100,16 +101,19 @@ ActiveRecord::Schema.define(version: 2020_06_06_091455) do
   end
 
   create_table "cohorts", force: :cascade do |t|
+    t.string "cohort_name", null: false
     t.bigint "school_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["cohort_name"], name: "index_cohorts_on_cohort_name", unique: true
     t.index ["school_id"], name: "index_cohorts_on_school_id"
   end
 
   create_table "edgile_practices", force: :cascade do |t|
-    t.string "practice_name"
+    t.string "edgile_practice_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["edgile_practice_name"], name: "index_edgile_practices_on_edgile_practice_name", unique: true
   end
 
   create_table "edgile_practices_faculty_challenges", id: false, force: :cascade do |t|
@@ -133,9 +137,10 @@ ActiveRecord::Schema.define(version: 2020_06_06_091455) do
   end
 
   create_table "edgile_values", force: :cascade do |t|
-    t.string "value_name"
+    t.string "edgile_value_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["edgile_value_name"], name: "index_edgile_values_on_edgile_value_name", unique: true
   end
 
   create_table "edgile_values_faculty_challenges", id: false, force: :cascade do |t|
@@ -167,39 +172,45 @@ ActiveRecord::Schema.define(version: 2020_06_06_091455) do
   end
 
   create_table "faculty_development_groups", force: :cascade do |t|
-    t.string "development_grouping_name"
+    t.string "faculty_development_group_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["faculty_development_group_name"], name: "unique_faculty_development_group_name", unique: true
   end
 
   create_table "schools", force: :cascade do |t|
-    t.string "school_name"
+    t.string "school_name", null: false
     t.bigint "admin_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_id"], name: "index_schools_on_admin_id"
+    t.index ["school_name"], name: "index_schools_on_school_name", unique: true
   end
 
   create_table "student_challenge_levels", force: :cascade do |t|
-    t.string "student_level_name", null: false
-    t.integer "student_level_points", default: 0, null: false
+    t.string "student_challenge_level_name", null: false
+    t.integer "student_challenge_level_points", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_challenge_level_name"], name: "index_student_challenge_levels_on_student_challenge_level_name", unique: true
   end
 
   create_table "student_challenges", force: :cascade do |t|
-    t.string "student_challenge_name"
+    t.string "student_challenge_name", null: false
     t.bigint "student_challenge_level_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["student_challenge_level_id"], name: "index_student_challenges_on_student_challenge_level_id"
+    t.index ["student_challenge_name"], name: "index_student_challenges_on_student_challenge_name", unique: true
   end
 
   create_table "student_submissions", force: :cascade do |t|
+    t.string "student_submission_name", null: false
     t.bigint "student_challenge_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["student_challenge_id"], name: "index_student_submissions_on_student_challenge_id"
+    t.index ["student_submission_name"], name: "index_student_submissions_on_student_submission_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|

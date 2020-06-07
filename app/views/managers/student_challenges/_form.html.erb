@@ -1,0 +1,22 @@
+<%= form_with(model: student_challenge,
+              url: managers_student_challenge_path,
+              local: true) do |form| %>
+  <% if student_challenge.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(student_challenge.errors.count, "error") %> prohibited this manager_student_challenge from being saved:</h2>
+
+    <ul>
+      <% student_challenge.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

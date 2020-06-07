@@ -16,36 +16,36 @@
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
       <%# if current_user %>
-        <%# link_to "Home", tenant_path(current_user.tenant), class: 'navbar-item' %>
+      <%# link_to "Home", tenant_path(current_user.tenant), class: 'navbar-item' %>
       <%# else %>
-        <%= link_to "Home", root_path, class: 'navbar-item' %>
+      <%= link_to "Home", root_path, class: 'navbar-item' %>
       <%# end %>
 
       <%# if current_user && current_user.user_role == "manager" %>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Manage
-          </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Manage
+        </a>
 
-          <div class="navbar-dropdown">
-            <a class="navbar-item">
-              Tenant
-            </a>
-            <a class="navbar-item">
-              Spaces
-            </a>
-            <a class="navbar-item">
-              Categories
-            </a>
-            <a class="navbar-item">
-              Time Slots
-            </a>
-            <hr class="navbar-divider">
-            <a class="navbar-item">
-              User Roles
-            </a>
-          </div>
+        <div class="navbar-dropdown">
+          <a class="navbar-item">
+            Tenant
+          </a>
+          <a class="navbar-item">
+            Spaces
+          </a>
+          <a class="navbar-item">
+            Categories
+          </a>
+          <a class="navbar-item">
+            Time Slots
+          </a>
+          <hr class="navbar-divider">
+          <a class="navbar-item">
+            User Roles
+          </a>
         </div>
+      </div>
       <%# end %>
 
       <div class="navbar-item has-dropdown is-hoverable is-left">
@@ -86,20 +86,20 @@
             <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'button is-light' %>
           <% else %>
             <%# if @demo_present %>
-              <%# link_to "Sign up", new_user_registration_path, :class => 'button is-primary'  %>
+            <%# link_to "Sign up", new_user_registration_path, :class => 'button is-primary'  %>
             <%# end %>
             <%= link_to new_user_session_path, class: 'navbar-item is-light' do %>
-              <span class="icon">
-                <i class="far fa-star"></i>
-              </span>
-              <span>Login</span>
-            <% end %>
-            <%= link_to new_user_registration_path, :class => 'button is-primary' do %>
-              <span class="icon">
-                <i class="far fa-star"></i>
-              </span>
-              <span>Signup</span>
-            <% end %>
+            <span class="icon">
+              <i class="far fa-star"></i>
+            </span>
+            <span>Login</span>
+          <% end %>
+          <%= link_to new_admin_registration_path, :class => 'button is-primary' do %>
+          <span class="icon">
+            <i class="far fa-star"></i>
+          </span>
+          <span>Signup</span>
+          <% end %>
           <% end %>
         </div>
       </div>

@@ -1,1 +1,0 @@
-json.partial! "manager_student_challenges/manager_student_challenge", manager_student_challenge: @manager_student_challenge

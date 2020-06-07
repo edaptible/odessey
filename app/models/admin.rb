@@ -9,4 +9,11 @@ class Admin < ApplicationRecord
 
   validates :email, uniqueness: true
 
+  # semi-pretty url i.e. 1-english-for-everyone
+  def to_param
+    return nil unless persisted?
+    slug = (first_name + last_name).downcase.gsub(/[^a-z ]/, '').gsub(/ /, '-')
+    [id, slug].join('-')
+  end
+
 end

@@ -23,7 +23,7 @@ class Admins::SessionsController < Devise::SessionsController
   # end
 
   protected
-  # def configure_sign_in_params
+  # def sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password, :password_confirmation])
   # end
 

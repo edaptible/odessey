@@ -10,4 +10,13 @@ class StudentChallenge < ApplicationRecord
   has_rich_text :student_coaching_ideas
   has_rich_text :student_challenge_description
 
+  validates :student_challenge_name, uniqueness: true
+
+  # semi-pretty url i.e. 1-english-for-everyone
+  def to_param
+    return nil unless persisted?
+    slug = student_challenge_name.downcase.gsub(/[^a-z ]/, '').gsub(/ /, '-')
+    [id, slug].join('-')
+  end
+
 end

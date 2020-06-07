@@ -14,4 +14,11 @@ class User < ApplicationRecord
 
   validates :username, uniqueness: true
 
+  # semi-pretty url i.e. 1-english-for-everyone
+  def to_param
+    return nil unless persisted?
+    slug = username.downcase.gsub(/[^a-z ]/, '').gsub(/ /, '-')
+    [id, slug].join('-')
+  end
+
 end
