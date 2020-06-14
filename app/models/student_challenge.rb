@@ -8,7 +8,7 @@ class StudentChallenge < ApplicationRecord
 
   # write-up can handle photos
   has_rich_text :student_coaching_ideas
-  has_rich_text :student_challenge_description
+  has_rich_text :student_challenge_write_up
 
   validates :student_challenge_name, uniqueness: true
 
