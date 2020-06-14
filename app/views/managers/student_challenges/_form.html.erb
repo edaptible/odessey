@@ -1,6 +1,12 @@
-<%= form_with(model: student_challenge,
+<%# form_with(model: student_challenge,
               url: managers_student_challenge_path,
               local: true) do |form| %>
+<%= form_for( student_challenge,
+              local: true,
+              url: managers_student_challenges_path, #managers_student_challenge_path, # managers_student_challenges_path
+              id: "new-challenge-form",
+              class: "student_challenge" ) do |form|  %>
+
   <% if student_challenge.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(student_challenge.errors.count, "error") %> prohibited this manager_student_challenge from being saved:</h2>
@@ -13,10 +19,33 @@
   </div>
   <% end %>
 
-  
+  <div class="field">
+    <%= form.label :challenge_level %>
+    <%= form.collection_select :student_challenge_level_id,
+            StudentChallengeLevel.all, :id, :student_challenge_level_name, {},
+            {multiple: true, # class: 'input-reset pa2 mb2 db w-100 br3 bg-black-05 ba b--light-gray black-50'
+          } %>
+
+  </div>
+
+  <div class="field">
+    <%= form.label :student_challenge_name %>
+    <%= form.text_field :student_challenge_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :student_coaching_ideas %>
+    <%= form.rich_text_area :student_coaching_ideas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :student_challenge_write_up %>
+    <%= form.rich_text_area :student_challenge_write_up %>
+  </div>
 
 
   <div class="actions">
     <%= form.submit %>
   </div>
+
 <% end %>

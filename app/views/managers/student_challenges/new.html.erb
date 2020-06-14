@@ -1,0 +1,13 @@
+<p hidden id='new-challenge-<%= student_challenge.id %>' class='pageName'>Edit Challenge <%= student_challenge.id %></p>
+
+<h1>New Student Challenge</h1>
+
+<%# form_for( student_challenge, # local: true,  # PATH MUST BE SINGULAR!!!
+              url: managers_student_challenges_path,
+              id: "new-challenge-form", class: "student_challenge" ) do |form|  %>
+  <%# render 'form', form: form, student_challenge: student_challenge %>
+<%# end %>
+
+<%= render 'form', student_challenge: student_challenge %>
+
+<%= link_to 'Back', managers_student_challenges_path %>
