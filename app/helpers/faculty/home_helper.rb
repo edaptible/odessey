@@ -1,0 +1,2 @@
+module Faculty::HomeHelper
+end

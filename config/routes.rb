@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  namespace :leaders do
+    get 'dashboard/index'
+  end
+  namespace :managers do
+    get 'dashboard/index'
+  end
+  namespace :faculty do
+    get 'home/index'
+  end
+  namespace :students do
+    get 'home/index'
+  end
   # http://localhost:3000/users/sign_in
   devise_for :users,  path: 'users',  controllers: {
                                         sessions:      'users/sessions',
