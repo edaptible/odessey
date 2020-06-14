@@ -164,7 +164,8 @@ ActiveRecord::Schema.define(version: 2020_06_01_191455) do
   end
 
   create_table "faculty_challenges", force: :cascade do |t|
-    t.string "faculty_challenge_name"
+    t.string "faculty_challenge_name", null: false
+    t.boolean "faculty_development_is_demo", default: false, null: false
     t.bigint "faculty_development_group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -197,6 +198,7 @@ ActiveRecord::Schema.define(version: 2020_06_01_191455) do
 
   create_table "student_challenges", force: :cascade do |t|
     t.string "student_challenge_name", null: false
+    t.boolean "student_challenge_is_demo", default: false, null: false
     t.bigint "student_challenge_level_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
