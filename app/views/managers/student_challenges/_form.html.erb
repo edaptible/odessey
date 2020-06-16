@@ -23,9 +23,7 @@
     <%= form.label :challenge_level %>
     <%= form.collection_select :student_challenge_level_id,
             StudentChallengeLevel.all, :id, :student_challenge_level_name, {},
-            {multiple: true, # class: 'input-reset pa2 mb2 db w-100 br3 bg-black-05 ba b--light-gray black-50'
-          } %>
-
+            {multiple: false, class: ''} %>
   </div>
 
   <div class="field">
@@ -34,15 +32,45 @@
   </div>
 
   <div class="field">
-    <%= form.label :student_coaching_ideas %>
-    <%= form.rich_text_area :student_coaching_ideas %>
-  </div>
-
-  <div class="field">
     <%= form.label :student_challenge_write_up %>
     <%= form.rich_text_area :student_challenge_write_up %>
   </div>
 
+  <hr>
+  <h3>Optional Fields</h3>
+
+  <div class="field">
+    <%= form.label :edgile_value %>
+    <%= form.collection_select :edgile_value_ids,
+            StudentChallengeLevel.all, :id, :edgile_value_name, {},
+            {multiple: true, class: ''} %>
+  </div>
+
+  <div class="field">
+    <%= form.label :edgile_practice %>
+    <%= form.collection_select :edgile_practice_ids,
+            StudentChallengeLevel.all, :id, :edgile_practice_name, {},
+            {multiple: true, class: ''} %>
+  </div>
+
+  <div class="field">
+    <%= form.label :agile_value %>
+    <%= form.collection_select :agile_value_ids,
+            StudentChallengeLevel.all, :id, :agile_value_name, {},
+            {multiple: true, class: ''} %>
+  </div>
+
+  <div class="field">
+    <%= form.label :agile_principle %>
+    <%= form.collection_select :agile_principle_ids,
+            StudentChallengeLevel.all, :id, :agile_principle_name, {},
+            {multiple: true, class: ''} %>
+  </div>
+
+  <div class="field">
+    <%= form.label :student_coaching_ideas %>
+    <%= form.rich_text_area :student_coaching_ideas %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>

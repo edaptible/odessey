@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_01_191455) do
+ActiveRecord::Schema.define(version: 2020_06_01_193455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,31 +73,58 @@ ActiveRecord::Schema.define(version: 2020_06_01_191455) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "agile_concepts", force: :cascade do |t|
-    t.string "agile_concept_name", null: false
+  create_table "agile_principles", force: :cascade do |t|
+    t.string "agile_principle_name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["agile_concept_name"], name: "index_agile_concepts_on_agile_concept_name", unique: true
+    t.index ["agile_principle_name"], name: "index_agile_principles_on_agile_principle_name", unique: true
   end
 
-  create_table "agile_concepts_faculty_challenges", id: false, force: :cascade do |t|
+  create_table "agile_principles_faculty_challenges", id: false, force: :cascade do |t|
     t.bigint "faculty_challenge_id", null: false
-    t.bigint "agile_concept_id", null: false
+    t.bigint "agile_principle_id", null: false
     t.bigint "faculty_challenges_id", null: false
-    t.bigint "agile_concepts_id", null: false
-    t.index ["agile_concepts_id"], name: "index_agile_id_in_fac_agile_join"
-    t.index ["faculty_challenge_id", "agile_concept_id"], name: "unique_fac_challenges_agile_concepts", unique: true
-    t.index ["faculty_challenges_id"], name: "index_fac_challenges_id_in_fac_agile_join"
+    t.bigint "agile_principles_id", null: false
+    t.index ["agile_principles_id"], name: "index_agile_id_in_fac_agile_princ_join"
+    t.index ["faculty_challenge_id", "agile_principle_id"], name: "unique_fac_challenges_agile_principles", unique: true
+    t.index ["faculty_challenges_id"], name: "index_fac_chlng_id_in_fac_agile_princ_join"
   end
 
-  create_table "agile_concepts_student_challenges", id: false, force: :cascade do |t|
+  create_table "agile_principles_student_challenges", id: false, force: :cascade do |t|
     t.bigint "student_challenge_id", null: false
-    t.bigint "agile_concept_id", null: false
+    t.bigint "agile_principle_id", null: false
     t.bigint "student_challenges_id", null: false
-    t.bigint "agile_concepts_id", null: false
-    t.index ["agile_concepts_id"], name: "index_agile_id_in_stu_agile_join"
-    t.index ["student_challenge_id", "agile_concept_id"], name: "unique_stu_challenges_agile_concepts", unique: true
-    t.index ["student_challenges_id"], name: "index_stu_challenges_id_in_stu_agile_join"
+    t.bigint "agile_principles_id", null: false
+    t.index ["agile_principles_id"], name: "index_agile_id_in_stu_agile_princ_join"
+    t.index ["student_challenge_id", "agile_principle_id"], name: "unique_stu_challenges_agile_principles", unique: true
+    t.index ["student_challenges_id"], name: "index_stu_chlng_id_in_stu_agile_princ_join"
+  end
+
+  create_table "agile_values", force: :cascade do |t|
+    t.string "agile_value_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["agile_value_name"], name: "index_agile_values_on_agile_value_name", unique: true
+  end
+
+  create_table "agile_values_faculty_challenges", id: false, force: :cascade do |t|
+    t.bigint "faculty_challenge_id", null: false
+    t.bigint "agile_value_id", null: false
+    t.bigint "faculty_challenges_id", null: false
+    t.bigint "agile_values_id", null: false
+    t.index ["agile_values_id"], name: "index_agile_id_in_fac_agile_val_join"
+    t.index ["faculty_challenge_id", "agile_value_id"], name: "unique_fac_challenges_agile_values", unique: true
+    t.index ["faculty_challenges_id"], name: "index_fac_chlng_id_in_fac_agile_val_join"
+  end
+
+  create_table "agile_values_student_challenges", id: false, force: :cascade do |t|
+    t.bigint "student_challenge_id", null: false
+    t.bigint "agile_value_id", null: false
+    t.bigint "student_challenges_id", null: false
+    t.bigint "agile_values_id", null: false
+    t.index ["agile_values_id"], name: "index_agile_id_in_stu_agile_val_join"
+    t.index ["student_challenge_id", "agile_value_id"], name: "unique_stu_challenges_agile_values", unique: true
+    t.index ["student_challenges_id"], name: "index_stu_chlng_id_in_stu_agile_val_join"
   end
 
   create_table "cohorts", force: :cascade do |t|
@@ -245,10 +272,14 @@ ActiveRecord::Schema.define(version: 2020_06_01_191455) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "agile_concepts_faculty_challenges", "agile_concepts", column: "agile_concepts_id"
-  add_foreign_key "agile_concepts_faculty_challenges", "faculty_challenges", column: "faculty_challenges_id"
-  add_foreign_key "agile_concepts_student_challenges", "agile_concepts", column: "agile_concepts_id"
-  add_foreign_key "agile_concepts_student_challenges", "student_challenges", column: "student_challenges_id"
+  add_foreign_key "agile_principles_faculty_challenges", "agile_principles", column: "agile_principles_id"
+  add_foreign_key "agile_principles_faculty_challenges", "faculty_challenges", column: "faculty_challenges_id"
+  add_foreign_key "agile_principles_student_challenges", "agile_principles", column: "agile_principles_id"
+  add_foreign_key "agile_principles_student_challenges", "student_challenges", column: "student_challenges_id"
+  add_foreign_key "agile_values_faculty_challenges", "agile_values", column: "agile_values_id"
+  add_foreign_key "agile_values_faculty_challenges", "faculty_challenges", column: "faculty_challenges_id"
+  add_foreign_key "agile_values_student_challenges", "agile_values", column: "agile_values_id"
+  add_foreign_key "agile_values_student_challenges", "student_challenges", column: "student_challenges_id"
   add_foreign_key "cohorts", "schools"
   add_foreign_key "edgile_practices_faculty_challenges", "edgile_practices", column: "edgile_practices_id"
   add_foreign_key "edgile_practices_faculty_challenges", "faculty_challenges", column: "faculty_challenges_id"

@@ -1,8 +1,11 @@
 class StudentChallenge < ApplicationRecord
 
-  has_many :agile_concepts
-  has_many :edgile_values
-  has_many :edgile_practices
+  include ModelsMixin
+
+  has_many :agile_values,     dependent: :destroy
+  has_many :agile_principles, dependent: :destroy
+  has_many :edgile_values,    dependent: :destroy
+  has_many :edgile_practices, dependent: :destroy
 
   belongs_to :challenge_level
 
@@ -12,11 +15,15 @@ class StudentChallenge < ApplicationRecord
 
   validates :student_challenge_name, uniqueness: true
 
-  # semi-pretty url i.e. 1-english-for-everyone
-  def to_param
-    return nil unless persisted?
-    slug = student_challenge_name.downcase.gsub(/[^a-z ]/, '').gsub(/ /, '-')
-    [id, slug].join('-')
+  def to_s
+    student_challenge_name.to_s
   end
+
+  # # semi-pretty url i.e. 1-english-for-everyone
+  # def to_param
+  #   return nil unless persisted?
+  #   slug = self.to_s.downcase.gsub(/[^a-z ]/, '').gsub(/ /, '-')
+  #   [id, slug].join('-')
+  # end
 
 end

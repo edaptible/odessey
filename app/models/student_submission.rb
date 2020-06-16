@@ -1,5 +1,7 @@
 class StudentSubmission < ApplicationRecord
 
+  include ModelsMixin
+
   belongs_to :user
   belongs_to :student_challenge
 
@@ -7,11 +9,15 @@ class StudentSubmission < ApplicationRecord
 
   validates :student_submission_name, uniqueness: true
 
-  # semi-pretty url i.e. 1-english-for-everyone
-  def to_param
-    return nil unless persisted?
-    slug = student_submission_name.downcase.gsub(/[^a-z ]/, '').gsub(/ /, '-')
-    [id, slug].join('-')
+  def to_s
+    student_submission_name.to_s
   end
+
+  # # semi-pretty url i.e. 1-english-for-everyone
+  # def to_param
+  #   return nil unless persisted?
+  #   slug = self.to_s.downcase.gsub(/[^a-z ]/, '').gsub(/ /, '-')
+  #   [id, slug].join('-')
+  # end
 
 end

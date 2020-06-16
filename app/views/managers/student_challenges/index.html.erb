@@ -5,12 +5,21 @@
 <table>
   <thead>
     <tr>
+      <th>Challenge Name</th>
+      <th>Challenge Level</th>
+      <th>Completion Count</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% student_challenges.each do |student_challenge| %>
+    <tr>
+      <%= student_challenge.student_challenge_name %>
+    </tr>
+    <tr>
+      <%= student_challenge.student_challenge_level %>
+    </tr>
     <tr>
       <td><%= link_to 'Show', managers_student_challenge_path(student_challenge) %></td>
       <td><%= link_to 'Edit', edit_managers_student_challenge_path(student_challenge) %></td>
